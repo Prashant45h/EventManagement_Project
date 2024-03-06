@@ -55,11 +55,13 @@ function Venusave() {
             if (!data.isSuccess) {
 				Swal.fire({
 					position: "top-end",
-					icon: "error",
+					icon: "success",
 					title: data.message,
 					showConfirmButton: false,
 					timer: 1000,
 				})
+
+
 			} else {
 
 				Swal.fire({
