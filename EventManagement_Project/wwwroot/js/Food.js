@@ -91,7 +91,13 @@ function editdata(Data) {
         data: { FoodID: Data },
         success: function (data) {
             if (!data.isSuccess) {
-                alert(data.message)
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: data.message,
+                    showConfirmButton: false,
+                    timer: 1000,
+                })
             } else {
                 $('._CustomMessage').text(data.message);
                 if (data.dataList) {
