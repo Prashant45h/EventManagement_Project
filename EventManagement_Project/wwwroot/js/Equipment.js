@@ -50,8 +50,13 @@ function Equipmentsave() {
         processData: false,
         success: function (data) {
             if (!data.isSuccess) {
-				alert(data.message)
-
+				Swal.fire({
+					position: "top-end",
+					icon: "success",
+					title: data.message,
+					showConfirmButton: false,
+					timer: 1000,
+				})
             } else {
 				Swal.fire({
 					position: "top-end",
