@@ -39,7 +39,7 @@ namespace EventManagement_Project.Controllers
 
                 var fileName = Path.GetFileName(txtvenuFilepath.FileName);
                 var filePathInDatabase = Path.Combine("/VenuImages", fileName);
-
+   
                 if (!string.IsNullOrEmpty(venumodel[0]))
                 {
                     var result = VenuRepos.GetVenuDataForEdit(venumodel[0]);
@@ -174,5 +174,35 @@ namespace EventManagement_Project.Controllers
             }
             return Json(new { IsSuccess = false, Message = "Something went wrong, Please try again later!" });
         }
+
+        //[HttpPost]
+        //public ActionResult DeleteVenuData(string deletevenu)
+        //{
+        //    try
+        //    {
+        //        if (!string.IsNullOrEmpty(deletevenu))
+        //        {
+        //            var result = VenuRepos.deletedata(deletevenu);
+        //            if (result)
+        //            {
+        //                return Json(new { IsSuccess = true, Message = "Record deleted successfully!" });
+        //            }
+        //            else
+        //            {
+        //                return Json(new { IsSuccess = false, Message = "Something went wrong while deleting record!" });
+        //            }
+        //        }
+        //        else
+        //        {
+        //            return Json(new { IsSuccess = false, Message = "Invalid request" });
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { IsSuccess = false, Message = "An unexpected error occurred" });
+        //    }
+        //}
+
     }
+
 }
