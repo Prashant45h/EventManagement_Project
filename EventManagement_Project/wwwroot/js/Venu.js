@@ -17,9 +17,12 @@ function Venusave() {
 	} else {
 		venumodel.push(VenuName);
 	}
-	venumodel.push($("#txtCreatedby").val());
-	debugger;
+
+	venumodel.push("");
 	venumodel.push(txtvenuFilepath);
+
+	venumodel.push($("#txtCreatedby").val());
+
 
 
 	var Venucost = $("#txtVenucost").val();
