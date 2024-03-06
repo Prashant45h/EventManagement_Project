@@ -50,8 +50,13 @@ function Flowersave() {
 		processData: false,
 		success: function (data) {
 			if (!data.isSuccess) {
-				alert(data.message)
-
+				Swal.fire({
+					position: "top-end",
+					icon: "error",
+					title: data.message,
+					showConfirmButton: false,
+					timer: 1000,
+				})
 			} else {
 				Swal.fire({
 					position: "top-end",
@@ -82,7 +87,7 @@ function editdata(Data) {
 			if (!data.isSuccess) {
 				Swal.fire({
 					position: "top-end",
-					icon: "success",
+					icon: "error",
 					title: data.message,
 					showConfirmButton: false,
 					timer: 1000,

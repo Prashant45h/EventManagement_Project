@@ -58,8 +58,13 @@ function Foodsave() {
         processData: false,
         success: function (data) {
             if (!data.isSuccess) {
-                alert(data.message)
-
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: data.message,
+                    showConfirmButton: false,
+                    timer: 2500,
+                })
             } else {
                 Swal.fire({
                     position: "top-end",

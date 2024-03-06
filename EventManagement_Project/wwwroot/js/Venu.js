@@ -53,8 +53,13 @@ function Venusave() {
 		{
 
             if (!data.isSuccess) {
-				alert(data.message)
-
+				Swal.fire({
+					position: "top-end",
+					icon: "error",
+					title: data.message,
+					showConfirmButton: false,
+					timer: 1000,
+				})
 			} else {
 
 				Swal.fire({

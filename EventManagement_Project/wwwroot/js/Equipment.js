@@ -52,7 +52,7 @@ function Equipmentsave() {
             if (!data.isSuccess) {
 				Swal.fire({
 					position: "top-end",
-					icon: "success",
+					icon: "error",
 					title: data.message,
 					showConfirmButton: false,
 					timer: 1000,
