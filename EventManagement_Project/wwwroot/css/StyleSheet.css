@@ -1,0 +1,5 @@
+﻿.booking-card {
+    border-left: 5px solid #007bff; /* Add a blue border to the left of the panel */
+    margin-top: 2rem; /* Add some space above the panel */
+    padding: 1rem; /* Add some padding inside the panel */
+}

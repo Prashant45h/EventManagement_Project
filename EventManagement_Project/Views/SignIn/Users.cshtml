@@ -1,0 +1,24 @@
+﻿@model EventManagement_Project.Models.UserDetailsModel
+@{
+    string name = ViewData["Name"] as string;
+}
+<h1>Users</h1>
+    <table id="tbluserdetails" class="display" style="width:100%">
+        <thead>
+            <tr>
+            <th>name</th>
+            <th>username</th>
+            <th>mobile_No</th>
+            <th>email_ID</th>
+            <th>gender</th>
+            <th>birthDate</th>
+            <th>country_Name</th>
+            <th>state_Name</th>
+            <th>city_Name</th>
+            <th>address</th>
+            <th>createdOn</th>
+            </tr>
+        </thead>
+    </table>
+
+<script src="~/js/userdetails.js"></script>

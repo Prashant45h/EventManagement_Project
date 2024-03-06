@@ -1,0 +1,60 @@
+﻿@model EventManagement_Project.Models.BookingLightModel
+@{
+    string name = ViewData["Name"] as string;
+}
+<div class="container-fluid service py-5">
+    <div class="section-title  wow fadeInUp" data-wow-delay="0.2s">
+        <div class="sub-style">
+            <h4 class="sub-title px-3 mb-0">Booking Lightnings</h4>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+    <form method="post" enctype="multipart/form-data">
+        <div class="col-xs-offset-0 col-xs-4">
+
+            <input asp-for="BookingLightID" type="hidden" id="txtLightid" class="form-control" />
+
+            <div class="form-group">
+                <label class="control-label">LIGHTINIGS TYPE</label>
+                <div>
+                    <label><input type="radio" asp-for="LightType" id="INDOORRadio" name="LightType" value="IN DOOR" /> IN DOOR</label>
+                    <label><input type="radio" asp-for="LightType" id="OUTDOORRadio" name="LightType" value="OUT DOOR" /> OUT DOOR</label>
+                </div>
+                <span asp-validation-for="LightType" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label>LIGHTINGS LIST</label>
+                @if (TempData.ContainsKey("LightBook"))
+                {
+                    var lightinglist = TempData["LightBook"] as List<LightModel>;
+                    foreach (var lights in lightinglist)
+                    {
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="selectedlightings" id="lights_@lights.LightID" value="@lights.LightID" data-img="@lights.LightFilepath" onchange="changeImage(this)">
+                                @lights.LightName
+                            </label>
+                        </div>
+                    }
+                }
+            </div>
+            <button type="button" onclick="BOOKINGLIGHTS()" class="btn btn-success">Book Light </button>
+            <br />
+        </div>
+    </form>
+</div>
+        <div class="col-md-6">
+            <div style="margin-top: -15px;">
+                <img id="Image" src="" alt="Image" style="width:400px; height: 330px;">
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="~/js/bookinglights.js"></script>
+

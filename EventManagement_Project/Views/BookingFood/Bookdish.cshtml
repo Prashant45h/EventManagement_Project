@@ -1,0 +1,95 @@
+﻿@model EventManagement_Project.Models.BookingFoodModel;
+@{
+    string name = ViewData["Name"] as string;
+}
+<div class="container-fluid service py-5">
+    <div class="section-title  wow fadeInUp" data-wow-delay="0.2s">
+        <div class="sub-style">
+            <h4 class="sub-title px-3 mb-0"> Booking Food Items</h4>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+    <form method="post">
+        <div class="col-xs-offset-0 col-xs-4">
+
+            <input asp-for="BookingFoodID" type="hidden" id="txtFoodID" class="form-control" />
+
+
+            <div class="form-group">
+                <label class="control-label">Food Type</label>
+                <div>
+                    <label><input type="radio" asp-for="FoodType" id="vegRadio" name="FoodType" value="VEG" /> VEG</label>
+                    <label><input type="radio" asp-for="FoodType" id="nonVegRadio" name="FoodType" value="NON-VEG" /> NON-VEG</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Meal Type</label>
+                <div>
+                    <label><input type="radio" asp-for="MealType" id="lunchRadio" name="MealType" value="Lunch" /> Lunch</label>
+                    <label><input type="radio" asp-for="MealType" id="dinnerRadio" name="MealType" value="Dinner" /> Dinner</label>
+                </div>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label>Dish Type</label>
+                <select asp-for="DishType"  class=" form-control py-2 border-primary bg-transparent text-Black" id="txtDishType" style="width: 200px;">
+                    <option value="">Dish types</option>
+                    @if (TempData.ContainsKey("dishtype"))
+                    {
+                        var dishTypes = TempData["dishtype"] as List<DishTypeModel>;
+                        foreach (var DISHTYPE in dishTypes)
+                        {
+                            <option value="@DISHTYPE.ID">@DISHTYPE.Dishtype</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="DishType" class="text-danger"></span>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <label>FOOD LIST</label>
+                @if (TempData.ContainsKey("Food"))
+                {
+                    var FOODLIST = TempData["Food"] as List<FoodModel>;
+                    foreach (var FOODS in FOODLIST)
+                    {
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="selectedfood" id="food_@FOODS.FoodID" value="@FOODS.FoodID" data-img="@FOODS.FoodFilepath" onchange="changeImage(this)">
+                                @FOODS.FoodName
+                            </label>
+                        </div>
+                    }
+                }
+            </div>
+            <br />
+
+            <div class="form-group">
+
+
+
+                <button type="button" onclick="bookindishes()" class="btn btn-success">Book Food </button>
+
+                <a class="btn btn-success" href="/BookingFood/BookDish">Cancel</a>
+
+            </div>
+
+        </div>  
+  </form>
+        </div>
+
+            <div class="col-md-6">
+                <div style="margin-top: -15px;">
+                    <img id="Image" src="" alt="Image" style="width:400px; height: 330px;">
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="~/js/BookingFood.js"></script>

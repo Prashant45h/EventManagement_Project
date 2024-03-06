@@ -1,0 +1,151 @@
+﻿@model EventManagement_Project.Models.FoodModel;
+
+@{
+    ViewData["Title"] = "FoodDetails";
+}
+@{
+    string name = ViewData["Name"] as string;
+}
+<div class="container-fluid service py-5">
+    <div class="section-title  wow fadeInUp" data-wow-delay="0.2s">
+        <div class="sub-style">
+            <h4 class="sub-title px-3 mb-0">Food Details</h4>
+        </div>
+    </div>
+</div>
+
+<div id="displaySection" style="display:none;">
+    <table id="tblFooddetails" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    FoodID
+                </th>
+                <th>
+                    FoodType
+                </th>
+                <th>
+                    FoodName
+                </th>
+                <th>
+                    MealType
+                </th>
+                <th>
+                    DishType
+                </th>
+                <th>
+                    FoodCost
+                </th>
+                <th>
+                    CreatedDate
+                </th>
+            </tr>
+        </thead>
+    </table>
+    <a href="/Food/FoodDetails" onclick="showEditSection()">BACK TO HOME</a>
+    <br />
+    <br />
+    <a href="/AdminDashboard/Dashboard">BACK TO DASHBOARD</a>
+</div>
+
+
+<div id="editSection">
+<div class="container">
+        <div class="row">
+            <div class="col-md-6">
+    <form method="post" enctype="multipart/form-data">
+        <div class="col-xs-offset-0 col-xs-4">
+
+            <input asp-for="FoodID" type="hidden" id="txtFoodID" class="form-control py-2 border-primary bg-transparent text-Black" />
+
+            <div class="form-group">
+                <label class="control-label">Food Type</label>
+                <div>
+                    <label><input type="radio" asp-for="FoodType" id="vegRadio" value="VEG" /> VEG</label>
+                    <label><input type="radio" asp-for="FoodType" id="nonVegRadio" value="NON-VEG" /> NON-VEG</label>
+                </div>
+                <span asp-validation-for="FoodType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Meal Type</label>
+                <div>
+                    <label><input type="radio" asp-for="MealType" id="lunchRadio" value="Lunch" /> Lunch</label>
+                    <label><input type="radio" asp-for="MealType" id="dinnerRadio" value="Dinner" /> Dinner</label>
+                </div>
+                <span asp-validation-for="MealType" class="text-danger"></span>
+            </div>
+
+
+                <div class="form-group">
+                    <label>Dish Type</label>
+                    <select asp-for="DishType" class="form-control" id="txtDishType" style="width: 200px;">
+                        <option value="">Dish types</option>
+                        @if (TempData.ContainsKey("dishtype"))
+                        {
+                            var dishTypes = TempData["dishtype"] as List<DishTypeModel>;
+                            foreach (var DISHTYPE in dishTypes)
+                            {
+                                <option value="@DISHTYPE.ID">@DISHTYPE.Dishtype</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="DishType" class="text-danger"></span>
+                </div>
+
+
+
+
+            <div class="form-group">
+                <label class="control-label" asp-for="FoodName">Food Name</label>
+                <input asp-for="FoodName" type="text" id="txtfoodname" class="form-control py-2 border-primary bg-transparent text-Black" style="width: 200px;" />
+                <span asp-validation-for="FoodName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" asp-for="FoodCost">Food Cost</label>
+                <input asp-for="FoodCost" type="text" id="txtfoodcost" class="form-control py-2 border-primary bg-transparent text-Black" style="width: 200px;" />
+                <span asp-validation-for="FoodCost" class="text-danger"></span>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <div class="controls">
+                    <label class="control-label">Upload Food</label>
+                    <input type="file" id="txtfoodFilepath" title="Please Upload Food" name="files" multiple />
+                    <br />
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-actions">
+                <button type="button" onclick="Foodsave()" class="btn btn-success">Save Food</button>
+            </div>
+        </div>
+    </form>
+</div>
+            <div class="col-md-6">
+                <div style="margin-top: 00px;">
+                    <img id="Image" src="https://www.mistay.in/travel-blog/content/images/size/w2000/2020/06/andhra-cuisine-cover-2.jpg" alt="Image" style="width:400px; height: 330px;">
+                    <img id="foodImage" src="" alt="Image" style="max-width: 450px; max-height: 450px;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/js/Food.js"></script>
+
+<a id="showAlldishesLink" href="#" onclick="showDisplaySection()">Show All DISHESH</a>
+<script>
+    function showDisplaySection() {
+        $('#editSection').hide();
+        $('#displaySection').show();
+        $('#showAlldishesLink').hide();
+        $('#Image').hide();
+
+    }
+</script>

@@ -1,0 +1,116 @@
+﻿@model EventManagement_Project.Models.LightModel
+
+@{
+    ViewData["Title"] = "LightingsDetails";
+}
+@{
+    string name = ViewData["Name"] as string;
+}
+<div class="container-fluid service py-5">
+    <div class="section-title  wow fadeInUp" data-wow-delay="0.2s">
+        <div class="sub-style">
+            <h4 class="sub-title px-3 mb-0">Lightings Details</h4>
+        </div>
+    </div>
+</div>
+
+<div id="displaySection" style="display:none;">
+    <table id="tblLightingdetails" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    LightID
+                </th>
+                <th>
+                    LightName
+                </th>
+                <th>
+                    LightType
+                </th>
+                <th>
+                    LightCost
+                </th>
+                <th>
+                    CreatedDate
+                </th>
+            </tr>
+        </thead>
+    </table>
+    <a href="/Lightings/LightingsDetails" onclick="showEditSection()">BACK TO HOME</a>
+    <br />
+    <br />
+    <a href="/AdminDashboard/Dashboard">BACK TO DASHBOARD</a>
+</div>
+
+<div id="editSection">
+<div class="container">
+        <div class="row">
+            <div class="col-md-6">
+    <form method="post" enctype="multipart/form-data">
+        <div class="col-xs-offset-0 col-xs-4">
+
+            <input asp-for="LightID" type="hidden" id="txtLightid" class="form-control py-2 border-primary bg-transparent text-Black" />
+
+            <div class="form-group">
+                <label class="control-label">Light Type</label>
+                <div>
+                    <label><input type="radio" asp-for="LightType" id="INDOORRadio" value="IN DOOR" /> IN DOOR</label>
+                    <label><input type="radio" asp-for="LightType" id="OUTDOORRadio" value="OUT DOOR" /> OUT DOOR</label>
+                </div>
+                <span asp-validation-for="LightType" class="text-danger"></span>
+            </div>
+          
+            <div class="form-group">
+                <label class="control-label" asp-for="LightName">Light Name</label>
+                <input asp-for="LightName" type="text" id="txtLightname" class="form-control py-2 border-primary bg-transparent text-Black" style="width: 200px;" />
+                <span asp-validation-for="LightName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" asp-for="LightCost">Light Cost</label>
+                <input asp-for="LightCost" type="text" id="txtLightcost" class="form-control py-2 border-primary bg-transparent text-Black" style="width: 200px;" />
+                <span asp-validation-for="LightCost" class="text-danger"></span>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <div class="controls">
+                    <label class="control-label">Upload Lightings</label>
+                    <input type="file" id="txtLightFilepath" title="Please Upload Lightings" name="files" multiple />
+                    <br />
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-actions">
+                <button type="button" onclick="Lightingssave()" class="btn btn-success">Save Lightings</button>
+            </div>
+        </div>
+    </form>
+</div>
+            <div class="col-md-6">
+                <div style="margin-top: -15px;">
+                    <img id="Image" src="https://www.luciassociation.org/wp-content/uploads/2017/03/oulu-light-festival-2016.jpg" alt="Image" style="width:400px; height: 330px;">
+                    <img id="LightImage" src="" alt="Image" style="max-width: 450px; max-height: 450px;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/js/Lightings.js"></script>
+
+<a id="showAlllightsLink" href="#" onclick="showDisplaySection()">Show All Lightings</a>
+<script>
+    function showDisplaySection() {
+        $('#editSection').hide();
+        $('#displaySection').show();
+        $('#showAlllightsLink').hide();
+        $('#Image').hide();
+
+    }
+</script>

@@ -1,0 +1,111 @@
+﻿@model EventManagement_Project.Models.VenuModel
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+@{
+    string name = ViewData["Name"] as string;
+}
+
+<div class="container-fluid service py-5">
+        <div class="section-title  wow fadeInUp" data-wow-delay="0.2s">
+            <div class="sub-style">
+                <h4 class="sub-title px-3 mb-0">Venu Details</h4>
+            </div>
+    </div>
+</div>
+
+<div id="displaySection" style="display:none;">
+    <table id="tblVenudetails" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                VenuID
+            </th>
+            <th>
+                VenuName
+            </th>
+            <th>
+                VenuCost
+            </th>
+            <th>
+                Createdate
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+</table>
+    <a href="/Venu/VenuDetails" onclick="showEditSection()">BACK TO HOME</a>
+    <br />
+    <br />
+    <a href="/AdminDashboard/Dashboard">BACK TO DASHBOARD</a>
+</div>
+
+
+<div id="editSection">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+    <form method="post" enctype="multipart/form-data">
+        <div class="col-xs-offset-0 col-xs-4">
+
+
+            <div class="form-group">
+                <input asp-for="VenuID" type="hidden" id="txtVenuID" class="form-control" />
+
+                <label class="control-label" asp-for="VenuName">Venue Name</label>
+                    <input asp-for="VenuName" type="text" id="txtVenuName" class="form-control py-2 border-primary bg-transparent text-Black" style="width: 200px;" />
+                <span asp-validation-for="VenuName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" asp-for="VenuCost">Venue Cost</label>
+                    <input asp-for="VenuCost" type="text" id="txtVenucost" class="form-control py-2 border-primary bg-transparent text-Black" style="width: 200px;" />
+                <span asp-validation-for="VenuCost" class="text-danger"></span>
+            </div>
+
+            <br />
+                        <div class="form-group">
+                            <div class="controls">
+                                <label id="abcds" class="control-label">Upload Venue</label>
+                                <input type="file" id="txtvenuFilepath" title="Please Upload Venue" name="files" multiple />
+                                <br />
+                                <label id="filenameDisplay"></label>
+                            </div>
+                        </div>
+            <br />
+
+                   
+
+
+
+            <div class="form-actions">
+                    <button type="button" onclick="Venusave()" class="btn btn-success">Save Venu</button>
+            </div>
+        </div>
+            <a id="showAllVenuesLink" href="#" onclick="showDisplaySection()">Show All Venues</a>
+    </form>
+</div>
+    <div class="col-md-6">
+        <div style="margin-top: -15px;">
+        <img id="Image" src="https://i.pinimg.com/originals/0d/51/2f/0d512fbfdfb39c214670d4473038c401.jpg" alt="Image" style="width:400px; height: 330px;">
+                    <img id="venueImage" src="" alt="Image" style="max-width: 450px; max-height: 450px;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/js/venu.js"></script>
+
+<script> 
+    function showDisplaySection()
+    {
+        $('#editSection').hide();
+        $('#displaySection').show();
+        $('#showAllVenuesLink').hide();
+        $('#Image').hide();
+    }   
+</script>

@@ -1,0 +1,105 @@
+﻿@model EventManagement_Project.Models.FlowerModel
+
+@{
+    ViewData["Title"] = "FlowerDetails";
+}
+@{
+    string name = ViewData["Name"] as string;
+}
+<div class="container-fluid service py-5">
+    <div class="section-title  wow fadeInUp" data-wow-delay="0.2s">
+        <div class="sub-style">
+            <h4 class="sub-title px-3 mb-0">Flower Details</h4>
+        </div>
+    </div>
+</div>
+<div id="displaySection" style="display:none;">
+    <table id="tblFlowerdetails" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    FlowerID
+                </th>
+                <th>
+                    FlowerName
+                </th>
+                <th>
+                    FlowerCost
+                </th>
+                <th>
+                    Createdate
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+    <a href="/Flower/FlowerDetails" onclick="showEditSection()">BACK TO HOME</a>
+    <br />
+    <br />
+    <a href="/AdminDashboard/Dashboard">BACK TO DASHBOARD</a>
+</div>
+
+
+<div id="editSection">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+        <form method="post" enctype="multipart/form-data">
+            <div class="col-xs-offset-0 col-xs-4">
+
+                <div class="form-group">
+                    <input asp-for="FlowerID" type="hidden" id="txtFlowerID" class="form-control py-2 border-primary bg-transparent text-Black" />
+
+                    <label class="control-label" asp-for="FlowerName">Flower Name</label>
+                    <input asp-for="FlowerName" type="text" id="txtFlowerName" class="form-control py-2 border-primary bg-transparent text-Black" style="width: 200px;" />
+                    <span asp-validation-for="FlowerName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" asp-for="FlowerCost">Flower Cost</label>
+                    <input asp-for="FlowerCost" type="text" id="txtFlowercost" class="form-control py-2 border-primary bg-transparent text-Black" style="width: 200px;" />
+                    <span asp-validation-for="FlowerCost" class="text-danger"></span>
+                </div>
+                
+                <br />
+                <div class="form-group">
+                    <div class="controls">
+                        <label class="control-label">Upload Flower</label>
+                        <input type="file" id="txtFlowerFilepath" title="Please Upload Flower" name="files" multiple />
+                        <br />
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="form-actions">
+                    <button type="button" onclick="Flowersave()" class="btn btn-success">Save Flower</button>
+                </div>
+            </div>
+                    <a id="showAllFlowersLink" href="#" onclick="showDisplaySection()">Show All Flowers</a>
+
+        </form>
+    </div>
+            <div class="col-md-6">
+                <div style="margin-top: -15px;">
+                    <img id="Image" src="https://2.bp.blogspot.com/-FIS-CjoHr3o/UI1H4Jx32kI/AAAAAAAAMXU/92VoGsuzsP4/s1600/Rose+Flowers+Wallpapers+3.jpg" alt="Image" style="width:330px; height: 330px;">
+                    <img id="FlowerImage" src="" alt="Image" style="max-width: 450px; max-height: 450px;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/js/Flowers.js"></script>
+
+<script>
+    function showDisplaySection() {
+        $('#editSection').hide();
+        $('#displaySection').show();
+        $('#showAllFlowersLink').hide();
+        $('#Image').hide();
+
+    }
+</script>

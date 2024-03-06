@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+@{
+    string name = ViewData["Name"] as string;
+}
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+   
+    <!-- Libraries Stylesheet -->
+	<link href="~/layoutstyle/lib/animate/animate.min.css" rel="stylesheet" />
+	<link href="~/layoutstyle/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="~/layoutstyle/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Template Stylesheet -->
+	<link href="~/layoutstyle/css/style.css" rel="stylesheet" />
+</head>
+ 
+
+<body>
+
+
+    <!-- Topbar Start -->
+
+    @if (@Team.Rolename == "Admin")
+    {
+        <div class="container-fluid bg-dark px-8 d-none d-lg-block">
+            <div class="row gx-0 align-items-center" style="height: 45px;">
+                <div class="col-lg-18 text-center text-lg-start mb-lg-0">
+                    <div class="d-flex flex-wrap">
+                        <a href="/AdminDashboard/Dashboard" class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>DashBoard</a>
+                        <a href="/venu/VenuDetails" class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>Add Venu</a>
+                        <a href="/Equipment/EquipmentDetails" class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>Add Equipment</a>
+                        <a href="/Food/FoodDetails"class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>Add Dish</a>
+                        <a href="/Lightings/LightingsDetails" class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>Add lightnings</a>
+                        <a href="/Flower/FlowerDetails" class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>Add Flower</a>
+                        <a href="/BookingDetails/BookingDetails"  class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>Booking Approval</a>
+                        <a href ="/SignIn/Users" class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>User Profile</a>
+                        <a href="#" class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>Hi, @name!</a>
+                        <a href="/SignIn/Login" class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>Logout</a>               
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (@Team.Rolename == "Customer")
+    {
+        <div class="container-fluid bg-dark px-5 d-none d-lg-block">
+            <div class="row gx-0 align-items-center" style="height: 45px;">
+                <div class="col-lg-12 text-center text-lg-start mb-lg-0">
+                    <div class="d-flex flex-wrap">
+                        <a href="/CustomerDashboard/Dashboard" class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>DashBoard</a>
+                        <a href="/BookingVenu/VenuBooking" class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>Book Event</a>
+                        <a href="/AllBookings/ShowAllBookings" class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>Booking status</a>
+                        <a href="/SignIn/Users" class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>User Profile</a>
+                        <a href="#" class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>Hi, @name!</a>
+                        <a href="/SignIn/Login" class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <!-- Topbar End -->
+
+
+
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white px-4 px-lg-5 py-3 py-lg-0">
+            <a href="#" class="navbar-brand p-0">
+
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                        </div>
+                    </div>
+                </div>
+
+        <!-- Carousel Start -->
+        <div class="header-carousel owl-carousel">
+            <div class="header-carousel-item">
+                <img src="img/carousel-1.jpg" class="img-fluid w-100" alt="Image">
+                <div class="carousel-caption">
+                    <div class="carousel-caption-content p-3">
+                        <h5 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">Physiotherapy Center</h5>
+                        <h1 class="display-1 text-capitalize text-white mb-4">Best Solution For Painful Life</h1>
+                        <p class="mb-5 fs-5">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                        </p>
+                        <a class="btn btn-primary rounded-pill text-white py-3 px-5" href="#"></a>
+                    </div>
+                </div>
+            </div>
+        <!-- Carousel End -->
+
+    </div>
+    <!-- Navbar & Hero End -->
+
+    <br />
+    <br />
+    <br />
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Testimonial Start -->
+    <div class="container-fluid testimonial py-2 wow zoomInDown" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="">
+                <div class="sub-style">
+                </div>
+            </div>
+            <div class="testimonial-carousel owl-carousel">
+                <div class="testimonial-item">
+                    <div class="testimonial-inner p-5">
+                        <div class="testimonial-inner-img mb-4">
+                            <img src="https://fthmb.tqn.com/sA2TT0d2D1XyRA-vqLfeXu6aTfY=/1500x1000/filters:fill(auto,1)/Event-planners-56a2b3873df78cf77278efd5.jpg" class="img-fluid rounded-circle" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-inner p-5">
+                        <div class="testimonial-inner-img mb-4">
+                            <img src="https://fthmb.tqn.com/sA2TT0d2D1XyRA-vqLfeXu6aTfY=/1500x1000/filters:fill(auto,1)/Event-planners-56a2b3873df78cf77278efd5.jpg" class="img-fluid rounded-circle" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-inner p-5">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial End -->
+
+    <!-- Footer Start -->
+    <div class="container-fluid footer py-1 wow fadeIn" data-wow-delay="0.2s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item d-flex flex-column">
+                    </div>
+                </div>                
+                </div>
+            </div>
+        </div>
+    <!-- Footer End -->
+
+
+    <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                    <span class="text-white"><a href="#"><i class="fas fa-copyright text-light me-2"></i></a></span>
+                </div>
+                <div class="col-md-6 text-center text-md-end text-white">
+                  
+                     <a class="border-bottom" href="https://htmlcodex.com"></a>  <a class="border-bottom" href="https://themewagon.com"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/layoutstyle/lib/wow/wow.min.js"></script>
+	<script src="~/layoutstyle/lib/easing/easing.min.js"></script>
+	<script src="~/layoutstyle/lib/waypoints/waypoints.min.js"></script>
+	<script src="~/layoutstyle/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <link href="~/lib/datatables.css" rel="stylesheet" />
+    <link href="~/lib/datatables.min.css" rel="stylesheet" />
+    <script src="~/lib/datatables.js"></script>
+    <script src="~/lib/datatables.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
+  
+ 

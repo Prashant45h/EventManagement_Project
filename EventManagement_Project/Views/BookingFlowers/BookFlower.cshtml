@@ -1,0 +1,58 @@
+﻿@model EventManagement_Project.Models.BookingFlowerModelClass
+@{
+    string name = ViewData["Name"] as string;
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+    <form method="post" enctype="multipart/form-data">
+        <div class="col-xs-offset-0 col-xs-4">
+            <div class="container-fluid service py-5">
+                <div class="section-title  wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="sub-style">
+                        <h4 class="sub-title px-3 mb-0">
+                              Booking Flowers</h4>
+                    </div>
+                </div>
+            </div>
+            <input asp-for="BookingFlowerID" type="hidden" id="txtID" class="form-control" />
+
+
+            <div class="form-group">
+                <label>Flower List</label>
+                @if (TempData.ContainsKey("bookflower"))
+                {
+                    var Flowerslist = TempData["bookflower"] as List<FlowerModel>;
+                    foreach (var FLOWERS in Flowerslist)
+                    {
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="selectedflowers" id="FLOWERS_@FLOWERS.FlowerID" value="@FLOWERS.FlowerID" data-img="@FLOWERS.FlowerFilepath" onchange="changeImage(this)">
+                                @FLOWERS.FlowerName
+                            </label>
+                        </div>
+                    }
+                }
+            </div>
+            <br />
+            <div class="form-group">
+                <button type="button" onclick="SaveFLowers()" class="btn btn-success">Book FLowers</button>
+            </div>
+        </div>
+
+    
+
+    </form>
+</div>
+        <div class="col-md-6">
+            <div style="margin-top: 80px;">
+                <img id="Image" src="" alt="Image" style="width:350px; height: 330px;">
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="~/js/Bookingflowers.js"></script>
+
+

@@ -1,0 +1,105 @@
+﻿@model EventManagement_Project.Models.EquipmentModel
+
+@{
+    ViewData["Title"] = "EquipmentDetails";
+}
+@{
+    string name = ViewData["Name"] as string;
+}
+<div class="container-fluid service py-5">
+    <div class="section-title  wow fadeInUp" data-wow-delay="0.2s">
+        <div class="sub-style">
+            <h4 class="sub-title px-3 mb-0">Equipment Details</h4>
+        </div>
+    </div>
+</div>
+<div id="displaySection" style="display:none;">
+    <table id="tblEquipmentdetails" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    EquipmentId
+                </th>
+                <th>
+                    EquipmentName
+                </th>
+                <th>
+                    EquipmentCost
+                </th>
+                <th>
+                    Createdate
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+    <a href="/Equipment/EquipmentDetails" onclick="showEditSection()">BACK TO HOME</a>
+    <br />
+    <br />
+    <a href="/AdminDashboard/Dashboard">BACK TO DASHBOARD</a>
+
+</div>
+
+<div id="editSection">
+<div class="container">
+        <div class="row">
+            <div class="col-md-6">
+    <form method="post" enctype="multipart/form-data">
+        <div class="col-xs-offset-0 col-xs-4">
+
+
+            <div class="form-group">
+                <input asp-for="EquipmentId" type="hidden" id="txtEquipmentID" class="form-control py-2 border-primary bg-transparent text-Black" />
+
+                <label class="control-label" asp-for="EquipmentName">Equipment Name</label>
+                <input asp-for="EquipmentName" type="text" id="txtEquipmentName" class="form-control py-2 border-primary bg-transparent text-Black" style="width: 200px;" />
+                <span asp-validation-for="EquipmentName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" asp-for="EquipmentCost">Equipment Cost</label>
+                <input asp-for="EquipmentCost" type="text" id="txtEquipmentcost" class="form-control py-2 border-primary bg-transparent text-Black" style="width: 200px;" />
+                <span asp-validation-for="EquipmentCost" class="text-danger"></span>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <div class="controls">
+                    <label class="control-label">Upload Equipment</label>
+                    <input type="file" id="txtEquipmentFilepath" title="Please Upload Equipment" name="files" multiple />
+                    <br />
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-actions">
+                <button type="button" onclick="Equipmentsave()" class="btn btn-success">Save Equipment</button>
+            </div>
+        </div>
+                    <a id="showAllEquipmentsLink" href="#" onclick="showDisplaySection()">Show All Equipment</a>
+
+    </form>
+    </div>
+            <div class="col-md-6">
+                <div style="margin-top: -20px;">
+                    <img id="Image" src="https://wessexsound.co.uk/wp-content/uploads/2018/06/Mixer.jpg" alt="Image" style="width:400px; height: 330px;">
+                    <img id="EquipmentImage" src="" alt="Image" style="max-width: 450px; max-height: 450px;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/Equipment.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    function showDisplaySection() {
+        $('#editSection').hide();
+        $('#displaySection').show();
+        $('#showAllEquipmentsLink').hide();
+        $('#Image').hide();
+
+    }
+</script>

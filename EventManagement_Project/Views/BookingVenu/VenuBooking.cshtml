@@ -1,0 +1,105 @@
+﻿@model EventManagement_Project.Models.BookingVenueModel
+
+@{
+    ViewData["Title"] = "VenuBooking";
+}
+@{
+    string name = ViewData["Name"] as string;
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+    <form method="post" enctype="multipart/form-data">
+        <div class="col-xs-offset-0 col-xs-4">
+            <div class="container-fluid service py-5">
+                <div class="section-title  wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="sub-style">
+                        <h4 class="sub-title px-3 mb-0">Booking Venu</h4>
+                    </div>
+                </div>
+            </div>
+            <input asp-for="BookingVenuID" type="hidden" id="txtID" class="form-control" />
+
+
+            <div class="form-group">
+                <label>Event Type</label>
+                <select asp-for="EventTypeID" class="form-control py-2 border-primary bg-transparent text-Black" id="txtevent" style="width: 200px;">
+                    <option value="">Event types</option>
+                    @if (TempData.ContainsKey("eventTypes"))
+                    {
+                        var eventTypes = TempData["eventTypes"] as List<Eventtypemoedel>;
+                        foreach (var eventType in eventTypes)
+                        {
+                            <option value="@eventType.EventID">@eventType.EventType</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="EventTypeID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Venue Type</label>
+                <select asp-for="VenuID" class="form-control py-2 border-primary bg-transparent text-Black" id="txtvenu" style="width: 200px;" onchange="changeImage()">
+                    <option value="">Venu types</option>
+                    @if (TempData.ContainsKey("venutypes"))
+                    {
+                        var venutypes = TempData["venutypes"] as List<VenuModel>;
+                        foreach (var venu in venutypes)
+                        {
+                            <option value="@venu.VenuID" data-img="@venu.VenuFilepath">@venu.VenuName</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="VenuID" class="text-danger"></span>
+            </div>
+          
+
+            <div class="form-group">
+                <label asp-for="GuestCount">NumberOf Guest</label>
+                <input asp-for="GuestCount" class="form-control py-2 border-primary bg-transparent text-Black" id="txtguest" style="width: 200px;" />
+                <span asp-validation-for="GuestCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Booking Date</label>
+
+                <input asp-for="Createdate" type="date" class="form-control py-2 border-primary bg-transparent text-Black" id="txtdate" style="width: 200px;" />
+                <span asp-validation-for="Createdate" class="text-danger"></span>
+            </div>
+
+            <br />
+            <div class="form-group">
+
+
+
+                <button type="button" onclick="SaveVenus()" class="btn btn-success">Book Event</button>
+
+                <a class="btn btn-success" href="/CustomerDashboard/Dashboard">Cancel</a>
+
+            </div>
+
+
+        </div>
+ 
+
+    </form>
+</div>
+        <div class="col-md-6">
+            <div style="margin-top: 120px;">
+                <img id="Image" src="" alt="Image" style="width:400px; height: 330px;">
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="~/js/bookingvenu.js"></script>
+
+<script>
+    function changeImage() {
+        $('#Image').show();
+
+        var selectedOption = document.getElementById("txtvenu").options[document.getElementById("txtvenu").selectedIndex];
+        var imagePath = selectedOption.getAttribute('data-img');
+        document.getElementById("Image").src = imagePath ? imagePath : "/VenuImages/default.jpg";
+    }
+</script>

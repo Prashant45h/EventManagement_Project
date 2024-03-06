@@ -1,0 +1,215 @@
+﻿@model EventManagement_Project.Models.CompleteBookingModel
+
+@{
+    ViewData["Title"] = "ShowAllBookings";
+}
+@{
+    string name = ViewData["Name"] as string;
+}
+
+<h1>Show All Bookings</h1>
+<br />
+<div id="displaySection">
+<table id="tblbookingdetails" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                BookingNo
+            </th>
+            <th>
+                BookingDate
+            </th>
+            <th >
+                BookingApproval 
+            </th>
+            <th>
+                BookingApprovelDate
+            </th>
+            <th>
+                Print
+            </th>
+            <th>
+                BookingNo
+            </th>
+            <th>
+                BookingID
+            </th>
+        </tr>
+    </thead>
+</table>
+	<a href="/CustomerDashboard/Dashboard" name="goback" style="display: inline-block; padding: 10px 20px; background-color: #f8f4ff; color: black; text-decoration: none; border-radius: 5px; border: none; cursor: pointer;">Go Back</a>
+
+</div>
+
+
+<div id="editSection" style="display: none;">
+<div class="Container">
+    <form method="post" >
+<div class="Container" >
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-6 box-shadow booking-card">
+                <div class="card-header">
+                    <h4 class="my-2 font-weight-normal">Booking Details</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <input asp-for="BillingModel.BookingID" type="hidden" readonly="readonly" readonly="readonly" class="form-control py-2 border-primary bg-transparent text-Black" id="txtbookingid" />
+
+                            <label asp-for="BillingModel.BookingNo" class="form-label">Booking Number</label>
+                            <input asp-for="BillingModel.BookingNo" readonly="readonly" readonly="readonly" class="form-control py-2 border-primary bg-transparent text-Black" id="txtbookingno" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="BillingModel.BookingDate" class="form-label">Booking Date</label>
+                            <input asp-for="BillingModel.BookingDate" readonly="readonly" class="form-control py-2 border-primary bg-transparent text-Black" id="txtbookingdare" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="BillingModel.TotalAmount" class="form-label">Total Amount</label>
+                            <input asp-for="BillingModel.TotalAmount" readonly="readonly" class="form-control py-2 border-primary bg-transparent text-Black" id="txttotalamount" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="Container">
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-6 box-shadow booking-card">
+                <div class="card-header">
+                    <h4 class="my-2 font-weight-normal">Venue Details</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="BookingVenue.VenuName" class="form-label">Venue Name</label>
+                            <input asp-for="BookingVenue.VenuName" readonly="readonly" class="form-control py-2 border-primary bg-transparent text-Black" id="txtvenuename" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="BookingVenue.VenuCost" class="form-label">Venue Cost</label>
+                            <input asp-for="BookingVenue.VenuCost" readonly="readonly" class="form-control py-2 border-primary bg-transparent text-Black" id="txtvenucost" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="Container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-6 box-shadow booking-card">
+                <div class="card-header">
+                    <h4 class="my-2 font-weight-normal">Equipment Details</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="BookingEquipment.EquipmentName" class="form-label">Equipment Name</label>
+                            <input asp-for="BookingEquipment.EquipmentName" readonly="readonly" class="form-control py-2 border-primary bg-transparent text-Black" id="txtEquipmentname" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Equipment Cost</label>
+                            <input asp-for="BookingEquipment.EquipmentCost" type="text" readonly="readonly" class="form-control py-2 border-primary bg-transparent text-Black" id="txtequipmentprice"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="Container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-6 box-shadow booking-card">
+                <div class="card-header">
+                    <h4 class="my-2 font-weight-normal">Food Details</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="BookingFood.FoodType" class="form-label">Food Type</label>
+                            <input asp-for="BookingFood.FoodType" readonly="readonly" class="form-control py-2 border-primary bg-transparent text-Black" id="txtFoodType" />
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="BookingFood.MealType" class="form-label">Meal Type</label>
+                            <input asp-for="BookingFood.MealType" readonly="readonly" class="form-control py-2 border-primary bg-transparent text-Black" id="txtMealType" />
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="BookingFood.FoodName" class="form-label">Food Name</label>
+                            <input asp-for="BookingFood.FoodName" readonly="readonly" class="form-control py-2 border-primary bg-transparent text-Black" id="txtFoodName" />
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="BookingFood.FoodCost" class="form-label">Food Cost</label>
+                           <input asp-for="BookingFood.FoodCost" type="text" readonly="readonly" class="form-control py-2 border-primary bg-transparent text-Black" id="txtfoodprice" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="Container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-6 box-shadow booking-card">
+                <div class="card-header">
+                    <h4 class="my-2 font-weight-normal">Lighting Detials</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="BookingLight.LightType" class="form-label">Light Type</label>
+                            <input asp-for="BookingLight.LightType" readonly="readonly" class="form-control py-2 border-primary bg-transparent text-Black" id="txtLightType" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="BookingLight.LightName" class="form-label">Light Name</label>
+                            <input asp-for="BookingLight.LightName" readonly="readonly" class="form-control py-2 border-primary bg-transparent text-Black" id="txtLightName" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="BookingLight.LightCost" class="form-label">Light Cost</label>
+                            <input asp-for="BookingLight.LightCost" type="text" readonly="readonly" class="form-control py-2 border-primary bg-transparent text-Black" id="txtLightCost" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="Container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-6 box-shadow booking-card">
+                <div class="card-header">
+                    <h4 class="my-2 font-weight-normal">Flower Details</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="BookingFlower.FlowerName" class="form-label">Flower Name</label>
+                            <input asp-for="BookingFlower.FlowerName" readonly="readonly" class="form-control py-2 border-primary bg-transparent text-Black" id="txtFlowerName" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="BookingFlower.FlowerCost" class="form-label">Flower Cost</label>
+                            <input asp-for="BookingFlower.FlowerCost" type="text" readonly="readonly" class="form-control py-2 border-primary bg-transparent text-Black" id="txtFlowerCost" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+        <a href="/AllBookings/ShowAllBookings" style="display: inline-block; padding: 10px 20px; background-color: #f8f4ff; color: black; text-decoration: none; border-radius: 5px; border: none; cursor: pointer;">Go Back</a>
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="~/js/allbookings.js"></script>

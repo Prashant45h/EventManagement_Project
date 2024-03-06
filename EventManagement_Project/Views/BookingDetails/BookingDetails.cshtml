@@ -1,0 +1,106 @@
+﻿@model EventManagement_Project.Models.BillingModel
+
+@{
+    ViewData["Title"] = "Booking Details";
+}
+@{
+    string name = ViewData["Name"] as string;
+}
+
+<h1>Booking Details</h1>
+<div id="displaySection">
+<table id="tblbookingdetails" class="display" style="width:100%">
+    <thead>
+        <tr>
+                <th>
+                    Name
+                </th>
+            <th>
+                BookingNo
+            </th>
+            <th>
+                BookingDate
+            </th>
+            <th>
+                BookingApprovel
+            </th>
+            <th>
+                BookingApprovelDate
+            </th>
+            <th>
+                BookingNo
+            </th>
+        </tr>
+    </thead>
+</table>
+    <a href="/AdminDashboard/Dashboard" name="goback" style="display: inline-block; padding: 10px 20px; background-color: #f8f4ff; color: black; text-decoration: none; border-radius: 5px; border: none; cursor: pointer;">Go Back</a>
+
+</div>
+
+<div id="editSection" style="display: none;">
+<div class="container">
+    <br />
+    <h3><span class="label label-info">Booking Approval</span></h3>
+    <form method="post" >
+
+            <input asp-for="BookingID" id="txtid" type="hidden" />
+
+
+        <div class="row">
+            <div class="col-lg-4">
+                <label>Booking Number</label>
+                    <input asp-for="BookingNo" type="text" id="bookingno"class="form-control py-2 border-primary bg-transparent text-Black" readonly="readonly" readonly="readonly" style="width: 200px;" />
+            </div>
+            <div class="col-lg-4">
+                <label>Booking Date</label>
+                <input asp-for="BookingDate" type="text" id="bookingdate"class="form-control py-2 border-primary bg-transparent text-Black" readonly="readonly" style="width: 200px;" />
+            </div>
+            <div class="col-lg-4">
+                <label>Total Venue Cost</label>
+                <input asp-for="TotalVenueCost" type="text" id="venucost"class="form-control py-2 border-primary bg-transparent text-Black" readonly="readonly" style="width: 200px;" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <label>Total Equipment Cost</label>
+                <input asp-for="TotalEquipmentCost" type="text" id="equipmentcost"class="form-control py-2 border-primary bg-transparent text-Black" readonly="readonly" style="width: 200px;" />
+            </div>
+            <div class="col-lg-4">
+                <label>Total Food Cost</label>
+                <input asp-for="TotalFoodCost" type="text" id="foodcost"class="form-control py-2 border-primary bg-transparent text-Black" readonly="readonly" style="width: 200px;" />
+            </div>
+            <div class="col-lg-4">
+                <label>Total Flower Cost</label>
+                <input asp-for="TotalFlowerCost" type="text" id="flowercost"class="form-control py-2 border-primary bg-transparent text-Black" readonly="readonly" style="width: 200px;" />
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <label>Total Light Cost</label>
+
+                <input asp-for="TotalLightCost" type="text" id="lightcost"class="form-control py-2 border-primary bg-transparent text-Black" readonly="readonly" style="width: 200px;" />
+            </div>
+
+            <div class="col-lg-4">
+                <label>Total Amount</label>
+                <input asp-for="TotalAmount" type="text" id="totalamount"class="form-control py-2 border-primary bg-transparent text-Black" readonly="readonly" style="width: 200px;" readonly="readonly" />
+            </div>
+        </div>
+        <br />
+
+        <div class="form-group">
+                <input id="btnSubmit" type="button" name="submit" class="btn btn-success" onclick="Approve()" value="Approve" />
+                <input id="btnReject" type="button" name="submit" class="btn btn-success" onclick="REJECT()" value="Reject" />
+                <a href="/BookingDetails/BookingDetails" class="btn btn-success">GO BACK</a>
+
+        </div>
+      
+    </form>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="~/js/Bookingdetails.js"></script>

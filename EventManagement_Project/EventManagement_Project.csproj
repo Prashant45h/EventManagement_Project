@@ -1,0 +1,150 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\EventTypesModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\EquipmentImages\" />
+    <Folder Include="wwwroot\LightingImages\" />
+    <Folder Include="wwwroot\VenuImages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\fonts\inter\Inter-Bold.woff2" />
+    <None Include="wwwroot\assets\fonts\inter\Inter-Medium.woff2" />
+    <None Include="wwwroot\assets\fonts\inter\Inter-Regular.woff2" />
+    <None Include="wwwroot\assets\fonts\inter\Inter-SemiBold.woff2" />
+    <None Include="wwwroot\assets\fonts\material\material.woff2" />
+    <None Include="wwwroot\assets\fonts\tabler\tabler-icons.svg" />
+    <None Include="wwwroot\assets\fonts\tabler\tabler-icons.woff2" />
+    <None Include="wwwroot\assets\images\authentication\google-icon.svg" />
+    <None Include="wwwroot\assets\images\favicon.svg" />
+    <None Include="wwwroot\assets\images\logo-dark.svg" />
+    <None Include="wwwroot\assets\images\logo-white.svg" />
+    <None Include="wwwroot\assets\images\logo.svg" />
+    <None Include="wwwroot\assets\js\config.js" />
+    <None Include="wwwroot\assets\js\customizer.js" />
+    <None Include="wwwroot\assets\js\laout-compact.js" />
+    <None Include="wwwroot\assets\js\laout-horizontal.js" />
+    <None Include="wwwroot\assets\js\pages\dashboard-default.js" />
+    <None Include="wwwroot\assets\js\pcoded.js" />
+    <None Include="wwwroot\assets\js\plugins\apexcharts.min.js" />
+    <None Include="wwwroot\assets\js\plugins\bootstrap.min.js" />
+    <None Include="wwwroot\assets\js\plugins\clipboard.min.js" />
+    <None Include="wwwroot\assets\js\plugins\popper.min.js" />
+    <None Include="wwwroot\assets\js\plugins\simplebar.min.js" />
+    <None Include="wwwroot\layoutstyle\js\main.js" />
+    <None Include="wwwroot\layoutstyle\lib\easing\easing.js" />
+    <None Include="wwwroot\layoutstyle\lib\easing\easing.min.js" />
+    <None Include="wwwroot\layoutstyle\lib\owlcarousel\LICENSE" />
+    <None Include="wwwroot\layoutstyle\lib\owlcarousel\owl.carousel.js" />
+    <None Include="wwwroot\layoutstyle\lib\owlcarousel\owl.carousel.min.js" />
+    <None Include="wwwroot\layoutstyle\lib\waypoints\links.php" />
+    <None Include="wwwroot\layoutstyle\lib\waypoints\waypoints.min.js" />
+    <None Include="wwwroot\layoutstyle\lib\wow\wow.js" />
+    <None Include="wwwroot\layoutstyle\lib\wow\wow.min.js" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\bootstrap-grid.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\bootstrap-reboot.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\bootstrap-utilities.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\bootstrap.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\forms\_floating-labels.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\forms\_form-check.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\forms\_form-control.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\forms\_form-range.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\forms\_form-select.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\forms\_form-text.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\forms\_input-group.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\forms\_labels.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\forms\_validation.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\helpers\_clearfix.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\helpers\_colored-links.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\helpers\_position.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\helpers\_ratio.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\helpers\_stretched-link.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\helpers\_text-truncation.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\helpers\_visually-hidden.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_alert.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_border-radius.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_box-shadow.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_breakpoints.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_buttons.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_caret.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_clearfix.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_color-scheme.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_container.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_deprecate.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_forms.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_gradients.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_grid.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_image.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_list-group.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_lists.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_pagination.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_reset-text.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_resize.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_table-variants.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_text-truncate.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_transition.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_utilities.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\mixins\_visually-hidden.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\utilities\_api.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\vendor\_rfs.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_accordion.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_alert.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_badge.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_breadcrumb.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_button-group.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_buttons.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_card.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_carousel.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_close.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_containers.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_dropdown.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_forms.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_functions.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_grid.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_helpers.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_images.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_list-group.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_mixins.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_modal.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_nav.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_navbar.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_offcanvas.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_pagination.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_popover.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_progress.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_reboot.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_root.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_spinners.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_tables.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_toasts.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_tooltip.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_transitions.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_type.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_utilities.scss" />
+    <None Include="wwwroot\layoutstyle\scss\bootstrap\scss\_variables.scss" />
+  </ItemGroup>
+
+</Project>
