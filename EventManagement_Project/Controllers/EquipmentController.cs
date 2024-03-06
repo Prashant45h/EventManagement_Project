@@ -95,7 +95,7 @@ namespace EventManagement_Project.Controllers
                         EquipmentModel Obj = new EquipmentModel();
                         Obj.EquipmentId = Convert.ToInt32(dr["EquipmentId"]);
                         Obj.EquipmentName = Convert.ToString(dr["EquipmentName"]);
-                        Obj.EquipmentFilename = Convert.ToString(dr["EquipmentFilepath"]);
+                        Obj.EquipmentFilename = Convert.ToString(dr["EquipmentFilename"]);
                         Obj.EquipmentFilepath = Convert.ToString(dr[("EquipmentFilepath")]);
                         Obj.EquipmentCost = Convert.ToInt32(dr["EquipmentCost"]);
                         DataList.Add(Obj);

@@ -90,7 +90,7 @@ function editdata(Data) {
 					$('#txtEquipmentName').val(data.dataList.equipmentName);
 					$('#txtEquipmentcost').val(data.dataList.equipmentCost);
 					$('#EquipmentImage').attr('src', data.dataList.equipmentFilepath);
-					$('#txtEquipmentFilepath').attr(data.dataList.equipmentFilepath);
+					$('#txtEquipmentFilepath').attr(data.dataList.equipmentFilename);
 
 					$('#editSection').show();
 					$('#Image').hide();
