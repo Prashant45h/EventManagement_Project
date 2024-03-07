@@ -1,7 +1,7 @@
 ﻿using System.Data.SqlClient;
 using System.Data;
 using Microsoft.AspNetCore.Http;
-using EventManagement_Project.Models;
+using EventManagement_Project.Models;               
 
 namespace EventManagement_Project.Repository_Class
 {
@@ -154,62 +154,5 @@ namespace EventManagement_Project.Repository_Class
             }
             return true;
         }
-
-        //public static bool deletedata(string deletevenu)
-        //{
-        //    try
-        //    {
-        //        string queryImagePath = "SELECT VenuFilepath FROM Venu_Tbl WHERE VenuID = @VenuID";
-        //        string imagePath = null;
-
-        //        using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
-        //        using (SqlCommand sqlCommandImagePath = new SqlCommand(queryImagePath, sqlConnection))
-        //        {
-        //            sqlConnection.Open();
-        //            sqlCommandImagePath.CommandType = CommandType.Text;
-        //            sqlCommandImagePath.Parameters.Add("@VenuID", SqlDbType.Int).Value = Convert.ToInt32(deletevenu);
-        //            object result = sqlCommandImagePath.ExecuteScalar();
-        //            if (result != null && result != DBNull.Value)
-        //            {
-        //                imagePath = ((string)result).Replace("\\", "/");
-        //            }
-
-        //            sqlConnection.Close();
-        //        }
-
-        //        if (!string.IsNullOrEmpty(imagePath))
-        //        {
-        //            if (System.IO.File.Exists(imagePath))
-        //            {
-        //                System.IO.File.Delete(imagePath);
-        //            }
-        //            else
-        //            {
-        //                throw new FileNotFoundException("Image file not found at the specified path.", imagePath);
-        //            }
-        //        }
-
-        //        string queryDelete = "DELETE FROM Venu_Tbl WHERE VenuID = @VenuID";
-
-        //        using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
-        //        using (SqlCommand sqlCommandDelete = new SqlCommand(queryDelete, sqlConnection))
-        //        {
-        //            sqlConnection.Open();
-        //            sqlCommandDelete.CommandType = CommandType.Text;
-        //            sqlCommandDelete.Parameters.Add("@VenuID", SqlDbType.Int).Value = Convert.ToInt32(deletevenu);
-        //            sqlCommandDelete.ExecuteNonQuery();
-        //            sqlConnection.Close();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine("An error occurred: " + ex.Message);
-        //        return false;
-        //    }
-        //    return true;
-        //}
-
-
-
     }
 }
