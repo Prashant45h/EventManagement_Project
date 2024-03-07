@@ -1,18 +1,25 @@
 ﻿using System.Data;
+using System.Data.SqlClient;
 using System.Security.Claims;
 using EventManagement_Project.Models;
 using EventManagement_Project.Repository_Class;
+using Grpc.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting.Internal;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Hosting;
+
 namespace EventManagement_Project.Controllers
 {
     public class VenuController : Controller
     {
         private readonly VenuRepos VenuRepos;
-        public VenuController(VenuRepos VenuRepos)
+
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        public VenuController(VenuRepos venuRepos, IWebHostEnvironment hostingEnvironment)
         {
-            this.VenuRepos = VenuRepos;
+            venuRepos = venuRepos;
+            _hostingEnvironment = hostingEnvironment;
         }
         public IActionResult Index()
         {
@@ -150,33 +157,82 @@ namespace EventManagement_Project.Controllers
             }
             return Json(new { IsSuccess = false, Message = "No data found for editing" });
         }
+        //[HttpPost]
+        //public ActionResult DeleteVenuData(string deletevenu)
+        //{
+        //    try
+        //    {
+        //        if (deletevenu != "")
+        //        {
+
+        //            var result = VenuRepos.deletedata(deletevenu);
+        //            if (result)
+        //            {
+        //                return Json(new { IsSuccess = true, Message = "Record is deleted!" });
+        //            }
+        //            else
+        //            {
+        //                return Json(new { IsSuccess = false, Message = "Something went wrong while deleting record!" });
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+        //    return Json(new { IsSuccess = false, Message = "Something went wrong, Please try again later!" });
+        //}
         [HttpPost]
         public ActionResult DeleteVenuData(string deletevenu)
         {
             try
             {
-                if (deletevenu != "")
+                string connectionstring = "Server=DESKTOP-10T1J5F\\SQLEXPRESS;Database=DB_EventManagment;User Id=Ivory;Password=Ivory@2024";
+                string selectQuery = "SELECT VenuFilepath FROM Venu_Tbl WHERE VenuID = @VenuID";
+                string filePath = null;
+
+                using (SqlConnection sqlConnection = new SqlConnection(connectionstring))
+                using (SqlCommand selectCommand = new SqlCommand(selectQuery, sqlConnection))
                 {
-                    var result = VenuRepos.deletedata(deletevenu);
-                    if (result)
+                    sqlConnection.Open();
+                    selectCommand.Parameters.AddWithValue("@VenuID", deletevenu);
+                    using (SqlDataReader reader = selectCommand.ExecuteReader())
                     {
-                        return Json(new { IsSuccess = true, Message = "Record is deleted!" });
+                        if (reader.Read())
+                        {
+                            filePath = reader["VenuFilepath"].ToString().Replace("\\", "/");
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(filePath))
+                {
+                    var webRootPath = _hostingEnvironment.WebRootPath;  
+                    filePath = Path.Combine(webRootPath, filePath.TrimStart('/'));
+
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
                     }
                     else
                     {
-                        return Json(new { IsSuccess = false, Message = "Something went wrong while deleting record!" });
+                        Console.WriteLine($"File does not exist: {filePath}");
                     }
                 }
+                else
+                {
+                    Console.WriteLine("File path is empty or null.");
+                }
+
+                VenuRepos.deletedata(deletevenu);
+
+                return Json(new { IsSuccess = true, Message = "Record is deleted!" });
             }
             catch (Exception ex)
             {
-                throw;
+                Console.WriteLine($"Error deleting file and record: {ex.Message}");
+                return Json(new { IsSuccess = false, Message = "Something went wrong, Please try again later!" });
             }
-            return Json(new { IsSuccess = false, Message = "Something went wrong, Please try again later!" });
         }
-
-    
-
     }
-
 }

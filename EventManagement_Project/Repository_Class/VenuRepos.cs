@@ -1,7 +1,8 @@
 ﻿using System.Data.SqlClient;
 using System.Data;
 using Microsoft.AspNetCore.Http;
-using EventManagement_Project.Models;               
+using EventManagement_Project.Models;
+using Microsoft.Extensions.Hosting.Internal;
 
 namespace EventManagement_Project.Repository_Class
 {
@@ -138,12 +139,14 @@ namespace EventManagement_Project.Repository_Class
             {
                 string query = "DELETE FROM Venu_Tbl WHERE VenuID = @VenuID";
 
+             
+
                 using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
                 using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {
                     sqlConnection.Open();
                     sqlCommand.CommandType = CommandType.Text;
-                    sqlCommand.Parameters.Add("@VenuID", SqlDbType.Int).Value = Convert.ToString(deletevenu);
+                    sqlCommand.Parameters.Add("@VenuID", SqlDbType.Int).Value = Convert.ToInt32(deletevenu);
                     sqlCommand.ExecuteNonQuery();
                     sqlConnection.Close();
                 }
@@ -154,5 +157,6 @@ namespace EventManagement_Project.Repository_Class
             }
             return true;
         }
+
     }
 }

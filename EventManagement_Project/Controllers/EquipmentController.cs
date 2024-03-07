@@ -2,16 +2,22 @@
 using System.Data;
 using EventManagement_Project.Repository_Class;
 using Microsoft.AspNetCore.Mvc;
+using System.Data.SqlClient;
 
 namespace EventManagement_Project.Controllers
 {
     public class EquipmentController : Controller
     {
         private readonly EquipmentRepos EquipmentRepos;
-        public EquipmentController(EquipmentRepos EquipmentRepos)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+
+     
+        public EquipmentController(EquipmentRepos EquipmentRepos, IWebHostEnvironment hostingEnvironment)
         {
-            this.EquipmentRepos = EquipmentRepos;
+            EquipmentRepos = EquipmentRepos;
+            _hostingEnvironment = hostingEnvironment;
         }
+
         public IActionResult Index()
         {
             return View();
@@ -146,30 +152,82 @@ namespace EventManagement_Project.Controllers
             }
             return Json(new { IsSuccess = false, Message = "Something went wrong while fetching records" });
         }
-            [HttpPost]
-            public ActionResult DeleteEquipmentData(string deleteEquipment)
+        //[HttpPost]
+        //public ActionResult DeleteEquipmentData(string deleteEquipment)
+        //{
+        //    try
+        //    {
+        //        if (deleteEquipment != "")
+        //        {
+        //            var result = EquipmentRepos.deletedata(deleteEquipment);
+        //            if (result)
+        //            {
+        //                return Json(new { IsSuccess = true, Message = "Record is deleted!" });
+        //            }
+        //            else
+        //            {
+        //                return Json(new { IsSuccess = false, Message = "Something went wrong while deleting record!" });
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+        //    return Json(new { IsSuccess = false, Message = "Something went wrong, Please try again later!" });
+        //}
+        [HttpPost]
+        public ActionResult DeleteEquipmentData(string deleteEquipment)
+        {
+            try
             {
-                try
+                string connectionstring = "Server=DESKTOP-10T1J5F\\SQLEXPRESS;Database=DB_EventManagment;User Id=Ivory;Password=Ivory@2024";
+                string selectQuery = "SELECT EquipmentFilePath FROM Equipment_Tbl WHERE EquipmentID = @EquipmentID";
+                string filePath = null;
+
+                using (SqlConnection sqlConnection = new SqlConnection(connectionstring))
+                using (SqlCommand selectCommand = new SqlCommand(selectQuery, sqlConnection))
                 {
-                    if (deleteEquipment != "")
+                    sqlConnection.Open();
+                    selectCommand.Parameters.AddWithValue("@EquipmentID", deleteEquipment);
+                    using (SqlDataReader reader = selectCommand.ExecuteReader())
                     {
-                        var result = EquipmentRepos.deletedata(deleteEquipment);
-                        if (result)
+                        if (reader.Read())
                         {
-                            return Json(new { IsSuccess = true, Message = "Record is deleted!" });
-                        }
-                        else
-                        {
-                            return Json(new { IsSuccess = false, Message = "Something went wrong while deleting record!" });
+                            filePath = reader["EquipmentFilePath"].ToString().Replace("\\", "/");
                         }
                     }
                 }
-                catch (Exception ex)
+
+                if (!string.IsNullOrEmpty(filePath))
                 {
-                    throw;
+                    var webRootPath = _hostingEnvironment.WebRootPath;
+                    filePath = Path.Combine(webRootPath, filePath.TrimStart('/'));
+
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"File does not exist: {filePath}");
+                    }
                 }
+                else
+                {
+                    Console.WriteLine("File path is empty or null.");
+                }
+
+                EquipmentRepos.deletedata(deleteEquipment);
+
+                return Json(new { IsSuccess = true, Message = "Record is deleted!" });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting file and record: {ex.Message}");
                 return Json(new { IsSuccess = false, Message = "Something went wrong, Please try again later!" });
             }
-        
+        }
+
     }
 }

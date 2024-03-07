@@ -3,6 +3,7 @@ using System.Data;
 using EventManagement_Project.Repository_Class;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.Data.SqlClient;
 
 namespace EventManagement_Project.Controllers
 {
@@ -10,10 +11,15 @@ namespace EventManagement_Project.Controllers
     {
 
         private readonly FoodRepos FoodRepos;
-        public FoodController(FoodRepos FoodRepos)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+
+
+        public FoodController(FoodRepos FoodRepos, IWebHostEnvironment hostingEnvironment)
         {
-            this.FoodRepos = FoodRepos;
+            FoodRepos = FoodRepos;
+            _hostingEnvironment = hostingEnvironment;
         }
+      
         public IActionResult Index()
         {
             return View();
@@ -160,29 +166,82 @@ namespace EventManagement_Project.Controllers
             return Json(new { IsSuccess = false, Message = "Something went wrong while fetching records" });
         }
 
+        //[HttpPost]
+        //public ActionResult Deletefood(string deletedish)
+        //{
+        //    try
+        //    {
+        //        if (deletedish != "")
+        //        {
+        //            var result = FoodRepos.deletedata(deletedish);
+        //            if (result)
+        //            {
+        //                return Json(new { IsSuccess = true, Message = "Record is deleted!" });
+        //            }
+        //            else
+        //            {
+        //                return Json(new { IsSuccess = false, Message = "Something went wrong while deleting record!" });
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+        //    return Json(new { IsSuccess = false, Message = "Something went wrong, Please try again later!" });
+        //}
         [HttpPost]
         public ActionResult Deletefood(string deletedish)
         {
             try
             {
-                if (deletedish != "")
+                string connectionstring = "Server=DESKTOP-10T1J5F\\SQLEXPRESS;Database=DB_EventManagment;User Id=Ivory;Password=Ivory@2024";
+                string selectQuery = "SELECT FoodFilePath FROM Food_Tbl WHERE FoodID = @FoodID";
+                string filePath = null;
+
+                using (SqlConnection sqlConnection = new SqlConnection(connectionstring))
+                using (SqlCommand selectCommand = new SqlCommand(selectQuery, sqlConnection))
                 {
-                    var result = FoodRepos.deletedata(deletedish);
-                    if (result)
+                    sqlConnection.Open();
+                    selectCommand.Parameters.AddWithValue("@FoodID", deletedish);
+                    using (SqlDataReader reader = selectCommand.ExecuteReader())
                     {
-                        return Json(new { IsSuccess = true, Message = "Record is deleted!" });
+                        if (reader.Read())
+                        {
+                            filePath = reader["FoodFilePath"].ToString().Replace("\\", "/");
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(filePath))
+                {
+                    var webRootPath = _hostingEnvironment.WebRootPath;
+                    filePath = Path.Combine(webRootPath, filePath.TrimStart('/'));
+
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
                     }
                     else
                     {
-                        return Json(new { IsSuccess = false, Message = "Something went wrong while deleting record!" });
+                        Console.WriteLine($"File does not exist: {filePath}");
                     }
                 }
+                else
+                {
+                    Console.WriteLine("File path is empty or null.");
+                }
+
+                FoodRepos.deletedata(deletedish);
+
+                return Json(new { IsSuccess = true, Message = "Record is deleted!" });
             }
             catch (Exception ex)
             {
-                throw;
+                Console.WriteLine($"Error deleting file and record: {ex.Message}");
+                return Json(new { IsSuccess = false, Message = "Something went wrong, Please try again later!" });
             }
-            return Json(new { IsSuccess = false, Message = "Something went wrong, Please try again later!" });
         }
+
     }
 }

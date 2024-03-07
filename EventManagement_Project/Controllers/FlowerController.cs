@@ -2,16 +2,22 @@
 using System.Data;
 using EventManagement_Project.Repository_Class;
 using Microsoft.AspNetCore.Mvc;
+using System.Data.SqlClient;
 
 namespace EventManagement_Project.Controllers
 {
     public class FlowerController : Controller
     {
         private readonly FlowerRepos FlowerRepos;
-        public FlowerController(FlowerRepos FlowerRepos)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+
+
+        public FlowerController(FlowerRepos FlowerRepos, IWebHostEnvironment hostingEnvironment)
         {
-            this.FlowerRepos = FlowerRepos;
+            FlowerRepos = FlowerRepos;
+            _hostingEnvironment = hostingEnvironment;
         }
+        
         public IActionResult Index()
         {
             return View();
@@ -145,29 +151,83 @@ namespace EventManagement_Project.Controllers
             }
             return Json(new { IsSuccess = false, Message = "No data found for editing" });
         }
+
+        //public ActionResult DeleteFlowerData(string deleteFlower)
+        //{
+        //    try
+        //    {
+        //        if (deleteFlower != "")
+        //        {
+        //            var result = FlowerRepos.deletedata(deleteFlower);
+        //            if (result)
+        //            {
+        //                return Json(new { IsSuccess = true, Message = "Record is deleted!" });
+        //            }
+        //            else
+        //            {
+        //                return Json(new { IsSuccess = false, Message = "Something went wrong while deleting record!" });
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+        //    return Json(new { IsSuccess = false, Message = "Something went wrong, Please try again later!" });
+        //}
+
         [HttpPost]
         public ActionResult DeleteFlowerData(string deleteFlower)
         {
             try
             {
-                if (deleteFlower != "")
+                string connectionstring = "Server=DESKTOP-10T1J5F\\SQLEXPRESS;Database=DB_EventManagment;User Id=Ivory;Password=Ivory@2024";
+                string selectQuery = "SELECT FlowerFilePath FROM Flower_Tbl WHERE FlowerID = @FlowerID";
+                string filePath = null;
+
+                using (SqlConnection sqlConnection = new SqlConnection(connectionstring))
+                using (SqlCommand selectCommand = new SqlCommand(selectQuery, sqlConnection))
                 {
-                    var result = FlowerRepos.deletedata(deleteFlower);
-                    if (result)
+                    sqlConnection.Open();
+                    selectCommand.Parameters.AddWithValue("@FlowerID", deleteFlower);
+                    using (SqlDataReader reader = selectCommand.ExecuteReader())
                     {
-                        return Json(new { IsSuccess = true, Message = "Record is deleted!" });
+                        if (reader.Read())
+                        {
+                            filePath = reader["FlowerFilePath"].ToString().Replace("\\", "/");
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(filePath))
+                {
+                    var webRootPath = _hostingEnvironment.WebRootPath;
+                    filePath = Path.Combine(webRootPath, filePath.TrimStart('/'));
+
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
                     }
                     else
                     {
-                        return Json(new { IsSuccess = false, Message = "Something went wrong while deleting record!" });
+                        Console.WriteLine($"File does not exist: {filePath}");
                     }
                 }
+                else
+                {
+                    Console.WriteLine("File path is empty or null.");
+                }
+
+                FlowerRepos.deletedata(deleteFlower);
+
+                return Json(new { IsSuccess = true, Message = "Record is deleted!" });
             }
             catch (Exception ex)
             {
-                throw;
+                Console.WriteLine($"Error deleting file and record: {ex.Message}");
+                return Json(new { IsSuccess = false, Message = "Something went wrong, Please try again later!" });
             }
-            return Json(new { IsSuccess = false, Message = "Something went wrong, Please try again later!" });
         }
+
     }
 }
